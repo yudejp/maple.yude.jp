@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   automuteus:
     image: denverquane/amongusdiscord:${AUTOMUTEUS_TAG:?err}
