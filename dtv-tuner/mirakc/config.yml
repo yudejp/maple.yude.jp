@@ -1,0 +1,135 @@
+server:
+  addrs:
+    - http: 0.0.0.0:40772
+    - unix: /var/run/mirakc.sock
+  mounts:
+    /miraview:
+      path: /var/www/miraview
+      index: index.html
+
+epg:
+  cache-dir: /var/lib/mirakc/epg
+channels:
+  - name: TOKYO MX
+    type: GR
+    channel: '20'
+    disabled: false
+  - name: フジテレビジョン
+    type: GR
+    channel: '21'
+    disabled: false
+  - name: TBS
+    type: GR
+    channel: '22'
+    disabled: false
+  - name: テレビ東京
+    type: GR
+    channel: '23'
+    disabled: false
+  - name: テレビ朝日
+    type: GR
+    channel: '24'
+    disabled: false
+  - name: 日本テレビ
+    type: GR
+    channel: '25'
+    disabled: false
+  - name: NHKEテレ東京
+    type: GR
+    channel: '26'
+    disabled: false
+  - name: NHK総合・東京
+    type: GR
+    channel: '27'
+    disabled: false
+  - name: チバテレビ
+    type: GR
+    channel: '30'
+    disabled: false
+  - name: BS01TS0
+    type: BS
+    channel: BS01_0
+    disabled: false
+  - name: BS01TS1
+    type: BS
+    channel: BS01_1
+    disabled: false
+  - name: BS01TS2
+    type: BS
+    channel: BS01_2
+    disabled: false
+  - name: BS03TS1
+    type: BS
+    channel: BS03_1
+    disabled: false
+  - name: BS09TS0
+    type: BS
+    channel: BS09_0
+    disabled: false
+  - name: BS09TS2
+    type: BS
+    channel: BS09_2
+    disabled: false
+  - name: BS11TS0
+    type: BS
+    channel: BS11_0
+    disabled: false
+  - name: BS13TS0
+    type: BS
+    channel: BS13_0
+    disabled: false
+  - name: BS13TS1
+    type: BS
+    channel: BS13_1
+    disabled: false
+  - name: BS15TS0
+    type: BS
+    channel: BS15_0
+    disabled: false
+  - name: BS23TS1
+    type: BS
+    channel: BS23_1
+    disabled: false
+  - name: BS23TS2
+    type: BS
+    channel: BS23_2
+    disabled: false
+  - name: BS23TS3
+    type: BS
+    channel: BS23_3
+    disabled: false
+tuners:
+  - name: 'e-better DTV02A-4TS-P #1'
+    types:
+      - GR
+      - BS
+      - CS
+    command: recpt1 --device /dev/isdb6014video0 {{channel}} {{duration}} -
+    disabled: false
+  - name: 'e-better DTV02A-4TS-P #2'
+    types:
+      - GR
+      - BS
+      - CS
+    command: recpt1 --device /dev/isdb6014video1 {{channel}} {{duration}} -
+    disabled: false
+  - name: 'e-better DTV02A-4TS-P #3'
+    types:
+      - GR
+      - BS
+      - CS
+    command: recpt1 --device /dev/isdb6014video2 {{channel}} {{duration}} -
+    disabled: false
+  - name: 'e-better DTV02A-4TS-P #4'
+    types:
+      - GR
+      - BS
+      - CS
+    command: recpt1 --device /dev/isdb6014video3 {{channel}} {{duration}} -
+    disabled: false
+
+filters:
+    decode-filter:
+        command: >-
+            socat - tcp-connect:b25:40773
+

@@ -1,0 +1,7 @@
+[general]
+    location = "Chiba, Japan"
+    connection = "つなぐネットコミュニケーションズ e-mansion"
+[http]
+    destinations = [
+        "https://www.google.co.jp",
+    ]

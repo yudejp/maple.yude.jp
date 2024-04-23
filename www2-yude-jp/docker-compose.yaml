@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  caddy:
+    image: caddy
+    restart: always
+    volumes:
+      - ./html:/usr/share/caddy
+      - ./Caddyfile:/etc/caddy/Caddyfile
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: always
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN
