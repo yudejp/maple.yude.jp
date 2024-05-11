@@ -1,0 +1,14 @@
+services:
+  ping:
+    image: quay.io/prometheus/blackbox-exporter:latest
+    command: --config.file=/config/blackbox.yml
+    volumes:
+      - ./blackbox.yml:/config/blackbox.yml
+    ports:
+      - 9115:9115
+  speedtest:
+    image: billimek/prometheus-speedtest-exporter:latest
+    ports:
+      - 9469:9469
+    environment:
+      - server_ids=14623,7139

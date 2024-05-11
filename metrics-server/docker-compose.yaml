@@ -1,7 +1,6 @@
 services:
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
     user: root
     restart: always
     volumes:
@@ -21,7 +20,6 @@ services:
 
   grafana:
     image: grafana/grafana-oss:latest
-    container_name: grafana
     restart: always
     user: root
     volumes:
@@ -38,27 +36,37 @@ services:
       - renderer
 
   renderer:
+    restart: always
     image: grafana/grafana-image-renderer:latest
-  
-  switchbot-exporter:
-    image: ghcr.io/yude/switchbot-exporter:master
-    restart: unless-stopped
-    ports:
-      - 8882:8080
-    env_file: .env
-  
+
+  # switchbot-exporter:
+  #   image: ghcr.io/yude/switchbot-exporter:master
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8882:8080
+  #   env_file: .env
+
   cloudflared-grafana:
     image: cloudflare/cloudflared:latest
     user: root
-    restart: unless-stopped
+    restart: always
     command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN_GRAFANA
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
-  
+
   cloudflared-prometheus:
     image: cloudflare/cloudflared:latest
     user: root
-    restart: unless-stopped
+    restart: always
     command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN_PROMETHEUS
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
+
+  snmp:
+    image: prom/snmp-exporter
+    restart: always
+    ports:
+      - "161:161/udp"
+
+    # volumes:
+    #   - ./snmp.yml:/etc/snmp_exporter/snmp.yml

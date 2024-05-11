@@ -1,30 +1,101 @@
 global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
-  scrape_timeout: 10s
+  scrape_interval: 2m
+  evaluation_interval: 2m
+  scrape_timeout: 1m
   external_labels:
     monitor: 'yudejp'
 
 scrape_configs:
-  - job_name: prometheus
-    metrics_path: /metrics
-    static_configs:
-      - targets:
-        - prometheus:9090
-  # - file_sd_configs:
-  #   - files:
-  #     - /etc/prometheus/node.yaml
-  #   job_name: node
-  - job_name: 'switchbot'
+  - job_name: 'maple_blackbox'
     scrape_interval: 5m
-    metrics_path: /metrics
+    metrics_path: /probe
+    params:
+      module: [icmp_ipv4]
     static_configs:
       - targets:
-        - D96586B2340E
+        - 1.1.1.1
+        - 8.8.8.8
+        - 9.9.9.9
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: switchbot-exporter:8080
+        replacement: 100.113.236.37:9115
+  - job_name: 'sakyu_blackbox'
+    scrape_interval: 5m
+    metrics_path: /probe
+    params:
+      module: [icmp_ipv4]
+    static_configs:
+      - targets:
+        - 1.1.1.1
+        - 8.8.8.8
+        - 9.9.9.9
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 100.106.37.39:9115
+  - job_name: 'bway_blackbox'
+    scrape_interval: 5m
+    metrics_path: /probe
+    params:
+      module: [icmp_ipv4]
+    static_configs:
+      - targets:
+        - 1.1.1.1
+        - 8.8.8.8
+        - 9.9.9.9
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 100.70.127.76:9115
+  - job_name: 'maple_speedtest'
+    metrics_path: /probe
+    params:
+      script: [speedtest]
+    static_configs:
+      - targets:
+        - 100.113.236.37:9469
+    scrape_interval: 60m
+    scrape_timeout: 90s
+  - job_name: 'sakyu_speedtest'
+    metrics_path: /probe
+    params:
+      script: [speedtest]
+    static_configs:
+      - targets:
+        - 100.106.37.39:9469
+    scrape_interval: 60m
+    scrape_timeout: 90s
+  - job_name: 'bway_speedtest'
+    metrics_path: /probe
+    params:
+      script: [speedtest]
+    static_configs:
+      - targets:
+        - 100.70.127.76:9469
+    scrape_interval: 60m
+    scrape_timeout: 90s
+  - job_name: 'snmp'
+    static_configs:
+      - targets:
+        - 192.168.100.1 # NRT
+        - 192.168.0.1 # HND
+    metrics_path: /snmp
+    # params:
+    #   module: [nec_ix]
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: snmp:9116

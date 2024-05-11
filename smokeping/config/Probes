@@ -19,3 +19,34 @@ forks = 10
 offset = random
 pings = 5
 port = 80
+
+
++ speedtest
+binary = /usr/local/bin/speedtest-cli
+timeout = 300
+forks = 1
+step = 3600
+offset = random
+pings = 3
+extraargs = --secure
+
+++ speedtest-download
+measurement = download
+
+++ speedtest-upload
+measurement = upload
+
++ speedtestcli
+binary = /usr/local/bin/speedtest
+timeout = 300
+forks = 1
+step = 3600
+offset = random
+pings = 3
+# extraargs = --accept-license
+
+++ speedtestcli-download
+measurement = download
+
+++ speedtestcli-upload
+measurement = upload

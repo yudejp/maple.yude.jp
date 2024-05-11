@@ -2,7 +2,7 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root
-    restart: unless-stopped
+    restart: always
     command: tunnel --url http://host.docker.internal:8086/0/stream --no-chunked-encoding run motion
     volumes:
       - '$HOME/.cloudflared:/root/.cloudflared'

@@ -25,3 +25,39 @@ host = 8.8.8.8
 menu = Google (www.google.co.jp)
 title = Google (www.google.co.jp)
 host = www.google.co.jp
+
++ SpeedTest
+menu = Speed Tests
+title = Speed Tests
+
+++ Download
+menu = Download
+title = Download
+probe = speedtest-download
+measurement = download
+host = dummy.com
+server = 14623
+
+++ Upload
+menu = Upload
+title = Upload
+probe = speedtest-upload
+measurement = upload
+host = dummy.com
+server = 14623
+
+# ++ Download-ookla
+# menu = Download
+# title = Download
+# probe = speedtestcli-download
+# measurement = download
+# host = dummy.com
+# #server = 1737
+
+# ++ Upload-ookla
+# menu = Upload
+# title = Upload
+# probe = speedtestcli-upload
+# measurement = upload
+# host = dummy.com
+# #server = 1737

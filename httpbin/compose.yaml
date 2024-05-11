@@ -1,15 +1,7 @@
 services:
-  smokeping:
-    image: jwigley/smokeping-speedtest
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Tokyo
-    volumes:
-      - ./config:/config
-      - ./data:/data
+  app:
+    image: kennethreitz/httpbin
     restart: always
-
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root
