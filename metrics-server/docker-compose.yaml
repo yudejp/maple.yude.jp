@@ -8,6 +8,8 @@ services:
       - ./data/prometheus:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yaml"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   # node-exporter:
   #   image: quay.io/prometheus/node-exporter
@@ -61,12 +63,3 @@ services:
     command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN_PROMETHEUS
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
-
-  snmp:
-    image: prom/snmp-exporter
-    restart: always
-    ports:
-      - "161:161/udp"
-
-    # volumes:
-    #   - ./snmp.yml:/etc/snmp_exporter/snmp.yml

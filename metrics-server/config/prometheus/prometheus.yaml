@@ -84,18 +84,27 @@ scrape_configs:
         - 100.70.127.76:9469
     scrape_interval: 60m
     scrape_timeout: 90s
-  - job_name: 'snmp'
+  - job_name: 'maple_snmp'
     static_configs:
       - targets:
-        - 192.168.100.1 # NRT
-        - 192.168.0.1 # HND
+        - 192.168.100.1
     metrics_path: /snmp
-    # params:
-    #   module: [nec_ix]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: snmp:9116
+        replacement: 100.113.236.37:9116
+  - job_name: 'bway_snmp'
+    static_configs:
+      - targets:
+        - 192.168.0.1
+    metrics_path: /snmp
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 100.70.127.76:9116
