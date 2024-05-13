@@ -16,6 +16,8 @@ services:
       - penpot-exporter
     environment:
       - PENPOT_FLAGS=$PENPOT_FLAGS enable-login-with-ldap disable-registration
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   penpot-backend:
     image: "penpotapp/backend:latest"
@@ -37,6 +39,8 @@ services:
       - PENPOT_ASSETS_STORAGE_BACKEND=assets-fs
       - PENPOT_STORAGE_ASSETS_FS_DIRECTORY=/opt/data/assets
       - PENPOT_TELEMETRY_ENABLED=false
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   penpot-exporter:
     image: "penpotapp/exporter:latest"
@@ -44,6 +48,8 @@ services:
     environment:
       - PENPOT_PUBLIC_URI=http://penpot-frontend
       - PENPOT_REDIS_URI=redis://penpot-redis/0
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   penpot-postgres:
     image: "postgres:15"
@@ -56,10 +62,14 @@ services:
       - POSTGRES_DB=penpot
       - POSTGRES_USER=penpot
       - POSTGRES_PASSWORD=penpot
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   penpot-redis:
     image: redis:7
     restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   cloudflared:
     image: cloudflare/cloudflared:latest

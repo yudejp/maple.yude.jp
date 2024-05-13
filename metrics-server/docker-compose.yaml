@@ -8,8 +8,6 @@ services:
       - ./data/prometheus:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yaml"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
   # node-exporter:
   #   image: quay.io/prometheus/node-exporter

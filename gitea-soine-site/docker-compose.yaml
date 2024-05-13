@@ -1,6 +1,6 @@
 services:
   server:
-    image: gitea/gitea:1.21.2
+    image: gitea/gitea:1.21.11
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -17,6 +17,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   db:
     image: postgres:13
