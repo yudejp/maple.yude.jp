@@ -1,0 +1,12 @@
+services:
+  adguard:
+    restart: always
+    image: adguard/adguardhome:latest
+    volumes:
+      - ./work:/opt/adguardhome/work
+      - ./conf:/opt/adguardhome/conf
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: always
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN
