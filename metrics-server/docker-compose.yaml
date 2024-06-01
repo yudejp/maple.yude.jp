@@ -19,7 +19,7 @@ services:
   #     - ./rootfs:/rootfs
 
   grafana:
-    image: grafana/grafana-oss:latest
+    image: grafana/grafana-oss:11.0.0
     restart: always
     user: root
     volumes:
