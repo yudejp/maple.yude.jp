@@ -14,6 +14,16 @@ services:
       POSTGRES_DB: mastodon
       POSTGRES_PASSWORD: mastodon
 
+#  pgweb:
+#    restart: always
+#    image: sosedoff/pgweb
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      - PGWEB_DATABASE_URL=postgres://mastodon:mastodon@postgres?sslmode=disable
+#    depends_on:
+#      - postgres  # my database container is called postgres, not db
+
 #  db16:
 #    restart: always
 #    image: postgres:16-alpine
@@ -38,7 +48,7 @@ services:
       - ./redis:/data
 
   web:
-    image: plusminusio/mastodon:4.2.7-plusminus.4
+    image: plusminusio/mastodon:4.2.10-plusminus.1
     container_name: mastodon_web
     restart: always
     env_file: .env.production
@@ -56,7 +66,7 @@ services:
       POSTGRES_PASSWORD: mastodon_
 
   streaming:
-    image: plusminusio/mastodon:4.2.7-plusminus.4
+    image: plusminusio/mastodon:4.2.10-plusminus.1
     container_name: mastodon_streaming
     restart: always
     env_file: .env.production
@@ -68,7 +78,7 @@ services:
       - redis
 
   sidekiq:
-    image: plusminusio/mastodon:4.2.7-plusminus.4
+    image: plusminusio/mastodon:4.2.10-plusminus.1
     restart: always
     env_file: .env.production
     command: bundle exec sidekiq
