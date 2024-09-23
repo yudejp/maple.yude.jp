@@ -12,7 +12,7 @@ services:
     restart: always
 
   app:
-    image: nextcloud:fpm
+    image: nextcloud:29.0.6-fpm
     restart: always
     volumes:
       - ./data/html:/var/www/html
@@ -44,7 +44,7 @@ services:
       - app
 
   cron:
-    image: nextcloud:apache
+    image: nextcloud:29.0.6-apache
     restart: always
     volumes:
       - ./data/html:/var/www/html

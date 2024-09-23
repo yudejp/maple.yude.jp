@@ -12,7 +12,7 @@ services:
     restart: always
 
   app:
-    image: nextcloud:fpm
+    image: nextcloud:29.0.6-fpm
     restart: always
     ports:
       - "9000:80"
@@ -54,9 +54,9 @@ services:
       - app
     depends_on:
       - app
-  
+
   cron:
-    image: nextcloud:apache
+    image: nextcloud:29.0.6-apache
     restart: always
     volumes:
       - /mnt/store3/nc.yude.jp/data/html:/var/www/html
