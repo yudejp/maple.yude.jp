@@ -61,7 +61,7 @@ channels:
   - name: BS03TS1
     type: BS
     channel: BS03_1
-    disabled: false
+    disabled: true
   - name: BS09TS0
     type: BS
     channel: BS09_0
