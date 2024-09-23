@@ -7,14 +7,9 @@ services:
       - ./blackbox.yml:/config/blackbox.yml
     ports:
       - 9115:9115
-  speedtest:
-    image: billimek/prometheus-speedtest-exporter:latest
-    restart: always
-    ports:
-      - 9469:9469
-    environment:
-      - server_ids=14623,7139
   snmp:
     image: prom/snmp-exporter
     network_mode: host
     restart: always
+    volumes:
+      - './snmp.yml:/etc/snmp_exporter/snmp.yml'
