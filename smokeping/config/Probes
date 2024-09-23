@@ -3,9 +3,9 @@
 + FPing
 binary = /usr/sbin/fping
 
-+ FPing6
-binary = /usr/sbin/fping
-protocol = 6
+# + FPing6
+# binary = /usr/sbin/fping
+# protocol = 6
 
 + DNS
 binary = /usr/bin/dig
@@ -21,32 +21,32 @@ pings = 5
 port = 80
 
 
-+ speedtest
-binary = /usr/local/bin/speedtest-cli
-timeout = 300
-forks = 1
-step = 3600
-offset = random
-pings = 3
-extraargs = --secure
+# + speedtest
+# binary = /usr/local/bin/speedtest-cli
+# timeout = 300
+# forks = 1
+# step = 3600
+# offset = random
+# pings = 3
+# extraargs = --secure
 
-++ speedtest-download
-measurement = download
+# ++ speedtest-download
+# measurement = download
 
-++ speedtest-upload
-measurement = upload
+# ++ speedtest-upload
+# measurement = upload
 
-+ speedtestcli
-binary = /usr/local/bin/speedtest
-timeout = 300
-forks = 1
-step = 3600
-offset = random
-pings = 3
-# extraargs = --accept-license
+# + speedtestcli
+# binary = /usr/local/bin/speedtest
+# timeout = 300
+# forks = 1
+# step = 3600
+# offset = random
+# pings = 3
+# # extraargs = --accept-license
 
-++ speedtestcli-download
-measurement = download
+# ++ speedtestcli-download
+# measurement = download
 
-++ speedtestcli-upload
-measurement = upload
+# ++ speedtestcli-upload
+# measurement = upload

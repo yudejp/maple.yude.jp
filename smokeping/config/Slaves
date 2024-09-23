@@ -1,5 +1,5 @@
 *** Slaves ***
-secrets=/etc/smokeping/smokeping_secrets
+secrets=/config/smokeping_secrets
 #+boomer
 #display_name=boomer
 #color=0000ff
@@ -8,3 +8,17 @@ secrets=/etc/smokeping/smokeping_secrets
 #display_name=another
 #color=00ff00
 
++bway.tail5b1c5.ts.net
+display_name=bway (Tokyo, Japan)
+location=Tokyo, Japan
+color=00ff00
+
++sakyu.tail5b1c5.ts.net
+display_name=sakyu (Tottori, Japan)
+location=Tottori, Japan
+color=0000ff
+
++hitachi.tail5b1c5.ts.net
+display_name=hitachi (Ibaraki, Japan)
+location=Ibaraki, Japan
+color=00f0ff
