@@ -3,7 +3,8 @@ services:
     # My custom build (This image does not exist on ghcr.io currently. Build it by yourself.)
     # image: ghcr.io/yude/mirakc:main
     # Official build (Recommended)
-    image: docker.io/mirakc/mirakc:alpine
+    #image: docker.io/mirakc/mirakc:alpine
+    build: ./mirakc
     container_name: mirakc
     init: true
     restart: always
@@ -17,8 +18,7 @@ services:
     ports:
       - 40772:40772
     volumes:
-      - mirakc-epg:/var/lib/mirakc/epg
-      - ./channel-scan:/channel-scan
+      - ./mirakc-epg:/var/lib/mirakc/epg
       - ./mirakc/config.yml:/etc/mirakc/config.yml:ro
       - miraview-html:/var/www/miraview:ro
       - mirakc-sock:/var/run
@@ -34,7 +34,7 @@ services:
 
   miraview:
     image: docker.io/mirakc/mirakc:alpine
-    container_name: miraview-loader
+    container_name: miraview
     restart: "no"
     volumes:
       - miraview-html:/var/www/miraview
@@ -93,7 +93,7 @@ services:
     environment:
       BCAS_DEBUG: 1
       TZ: Asia/Tokyo
-  
+
   konomitv:
     image: ghcr.io/tsukumijima/konomitv:v0.9.0
     restart: always
@@ -110,6 +110,7 @@ services:
         target: '/host-rootfs/cap'
     devices:
       - '/dev/dri/:/dev/dri/'
+    container_name: 'konomitv'
 
   jellyfin:
     image: jellyfin/jellyfin
@@ -126,7 +127,7 @@ services:
     image: mariadb:10.5
     # image: mysql:8.0 # 囲み文字を使用する場合
     volumes:
-        - mysql-db:/var/lib/mysql
+        - ./db:/var/lib/mysql
     environment:
         MYSQL_USER: epgstation
         MYSQL_PASSWORD: epgstation
@@ -164,13 +165,9 @@ services:
     devices:
       - /dev/dri:/dev/dri
     restart: always
+    container_name: "epgstation"
 
 volumes:
-  mysql-db:
-      driver: local
-  mirakc-epg:
-    name: mirakc_epg
-    driver: local
   miraview-html:
     name: miraview_html
     driver: local
