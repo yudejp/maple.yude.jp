@@ -1,6 +1,7 @@
 services:
   smokeping:
     image: jwigley/smokeping-speedtest
+    hostname: maple
     environment:
       - PUID=1000
       - PGID=1000
@@ -9,9 +10,11 @@ services:
       - ./config:/config
       - ./data:/data
     restart: always
+    ports:
+      - 29000:80
 
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root
     restart: always
-    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN --protocol http2
