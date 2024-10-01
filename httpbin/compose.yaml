@@ -1,9 +1,0 @@
-services:
-  app:
-    image: kennethreitz/httpbin
-    restart: always
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    user: root
-    restart: always
-    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN
