@@ -1,8 +1,0 @@
-backup
-postgres
-redis
-.env
-.env.production
-archives
-postgres_16
-public
