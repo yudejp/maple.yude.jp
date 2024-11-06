@@ -3,7 +3,7 @@ services:
     image: caddy
     restart: always
     volumes:
-      - ./html:/usr/share/caddy
+      - /mnt/store2/html:/usr/share/caddy
       - ./Caddyfile:/etc/caddy/Caddyfile
 
   cloudflared:

@@ -1,4 +1,0 @@
-- labels:
-    env: prod
-  targets:
-    - switchbot-exporter:8080

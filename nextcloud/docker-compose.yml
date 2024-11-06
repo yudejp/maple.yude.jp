@@ -12,7 +12,7 @@ services:
     restart: always
 
   app:
-    image: nextcloud:29.0.6-fpm
+    image: nextcloud:30.0.0-fpm
     restart: always
     ports:
       - "9000:80"
@@ -38,25 +38,29 @@ services:
 #        docker-php-ext-enable smbclient &&
 #        php-fpm
 #      "
-  
+
   web:
     image: nginx
     restart: always
     container_name: nextcloud
     links:
       - app
+      - db
     ports:
       - 9020:80
+      - 9030:443
     volumes:
+      - ./nginx/certs:/etc/nginx/certs:ro
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/sites-enabled:/etc/nginx/sites-enabled:ro
+      - ./nginx/mime.types:/etc/nginx/mime.types:ro
     volumes_from:
       - app
     depends_on:
       - app
 
   cron:
-    image: nextcloud:29.0.6-apache
+    image: nextcloud:30.0.0-apache
     restart: always
     volumes:
       - /mnt/store3/nc.yude.jp/data/html:/var/www/html
