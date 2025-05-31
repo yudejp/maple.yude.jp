@@ -12,7 +12,7 @@ services:
     restart: always
 
   app:
-    image: nextcloud:29.0.6-fpm
+    image: nextcloud:30.0-fpm
     restart: always
     volumes:
       - ./data/html:/var/www/html
@@ -37,6 +37,7 @@ services:
       - app
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/mime.types:/etc/nginx/mime.types:ro
       - ./nginx/sites-enabled:/etc/nginx/sites-enabled:ro
     volumes_from:
       - app
@@ -44,7 +45,7 @@ services:
       - app
 
   cron:
-    image: nextcloud:29.0.6-apache
+    image: nextcloud:30.0-apache
     restart: always
     volumes:
       - ./data/html:/var/www/html

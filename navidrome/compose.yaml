@@ -10,9 +10,12 @@ services:
       ND_LOGLEVEL: info
       ND_SESSIONTIMEOUT: 24h
       ND_BASEURL: ""
+      ND_DEFAULTLANGUAGE: "ja"
+      ND_TLSCERT: ""
+      ND_TLSKEY: ""
     volumes:
       - "./data:/data"
-      - "/mnt/store3/music:/music:ro"
+      - "/mnt/store2/music:/music:ro"
 
   cloudflared:
     image: cloudflare/cloudflared:latest

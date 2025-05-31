@@ -69,15 +69,19 @@ channels:
   - name: BS09TS2
     type: BS
     channel: BS09_2
+    disabled: true
+  - name: BS10TS0
+    type: BS
+    channel: BS15_2
     disabled: false
   - name: BS11TS0
     type: BS
     channel: BS11_0
-    disabled: false
+    disabled: true
   - name: BS13TS0
     type: BS
     channel: BS13_0
-    disabled: false
+    disabled: true
   - name: BS13TS1
     type: BS
     channel: BS13_1
@@ -90,14 +94,7 @@ channels:
     type: BS
     channel: BS23_1
     disabled: false
-  - name: BS23TS2
-    type: BS
-    channel: BS23_2
-    disabled: false
-  - name: BS23TS3
-    type: BS
-    channel: BS23_3
-    disabled: false
+
 tuners:
   - name: 'e-better DTV02A-4TS-P #1'
     types:
