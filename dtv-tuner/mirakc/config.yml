@@ -81,7 +81,7 @@ channels:
   - name: BS13TS0
     type: BS
     channel: BS13_0
-    disabled: true
+    disabled: false
   - name: BS13TS1
     type: BS
     channel: BS13_1

@@ -1,0 +1,10 @@
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./config:/config
+      - /mnt/store2/syncthing:/data
+    network_mode: host
+    restart: always

@@ -4,6 +4,7 @@ services:
     restart: always
     volumes:
       - /mnt/store3/html:/usr/share/caddy
+      - /mnt/store3/teltty:/usr/share/caddy/teltty
       - ./Caddyfile:/etc/caddy/Caddyfile
 
   cloudflared:

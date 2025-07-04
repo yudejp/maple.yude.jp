@@ -1,6 +1,6 @@
 services:
   samba:
-    image: ghcr.io/servercontainers/samba
+    image: ghcr.io/servercontainers/samba:latest
     restart: always
     network_mode: host
     cap_add:
