@@ -13,6 +13,7 @@ services:
       ND_DEFAULTLANGUAGE: "ja"
       ND_TLSCERT: ""
       ND_TLSKEY: ""
+      ND_ENABLETRANSCODINGCONFIG: "true"
     volumes:
       - "./data:/data"
       - "/mnt/store2/music:/music:ro"
