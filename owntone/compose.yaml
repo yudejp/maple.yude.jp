@@ -1,0 +1,15 @@
+services:
+  owntone:
+    image: docker.io/owntone/owntone:latest
+    hostname: apl.nrt.yude.jp
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./config:/etc/owntone
+      - /mnt/store2/music:/srv/media:ro
+      - ./cache:/var/cache/owntone
+    restart: always
+    network_mode: host
+
+volumes:
+  cache:
