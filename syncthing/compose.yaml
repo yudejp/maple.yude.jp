@@ -5,6 +5,6 @@ services:
       - TZ=Asia/Tokyo
     volumes:
       - ./config:/config
-      - /mnt/store2/syncthing:/data
+      - /mnt/store3/syncthing:/data
     network_mode: host
     restart: always

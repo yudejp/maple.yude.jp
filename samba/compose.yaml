@@ -16,7 +16,6 @@ services:
     volumes:
       - /etc/avahi/services/:/external/avahi
       - /mnt/store1:/mnt/store1
-      - /mnt/store2:/mnt/store2
       - /mnt/store3:/mnt/store3
       - /mnt/store4:/mnt/store4
       - /mnt/prod:/mnt/prod

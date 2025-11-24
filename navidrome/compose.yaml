@@ -16,7 +16,7 @@ services:
       ND_ENABLETRANSCODINGCONFIG: "true"
     volumes:
       - "./data:/data"
-      - "/mnt/store2/music:/music:ro"
+      - "/mnt/store3/music:/music:ro"
 
   cloudflared:
     image: cloudflare/cloudflared:latest
