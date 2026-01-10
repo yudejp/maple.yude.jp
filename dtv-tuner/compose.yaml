@@ -6,6 +6,8 @@ services:
     #image: docker.io/mirakc/mirakc:alpine
     build: ./mirakc
     container_name: mirakc
+    security_opt:
+      - apparmor=unconfined
     init: true
     restart: always
     devices:
@@ -34,6 +36,8 @@ services:
 
   miraview:
     image: docker.io/mirakc/mirakc:alpine
+    security_opt:
+      - apparmor=unconfined
     container_name: miraview
     restart: "no"
     volumes:
@@ -49,6 +53,8 @@ services:
     build:
       context: b25
     container_name: b25
+    security_opt:
+      - apparmor=unconfined
     hostname: b25
     ports:
       - 40773:40773
@@ -63,6 +69,8 @@ services:
     build:
       context: bcas
     container_name: bcas
+    security_opt:
+      - apparmor=unconfined
     hostname: bcas
     devices:
       - /dev/bus/usb
@@ -76,6 +84,8 @@ services:
     image: ghcr.io/tsukumijima/konomitv:v0.12.0
     restart: always
     network_mode: host
+    security_opt:
+      - apparmor=unconfined
     volumes:
       - type: bind
         source: './konomitv/config.yaml'
@@ -96,6 +106,8 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
+    security_opt:
+      - apparmor=unconfined
     network_mode: "host"
     devices:
       - /dev/dri:/dev/dri
@@ -108,7 +120,9 @@ services:
     image: mariadb:10.5
     # image: mysql:8.0 # 囲み文字を使用する場合
     volumes:
-        - ./db:/var/lib/mysql
+      - ./db:/var/lib/mysql
+    security_opt:
+      - apparmor=unconfined
     environment:
         MYSQL_USER: epgstation
         MYSQL_PASSWORD: epgstation
@@ -119,9 +133,9 @@ services:
     # command: --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_as_ci --performance-schema=false --expire_logs_days=1 --default-authentication-plugin=mysql_native_password # for myql
     restart: always
     logging:
-        options:
-            max-size: "10m"
-            max-file: "3"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   epgstation:
     build:
@@ -135,6 +149,8 @@ services:
       - ./epgs-to-discord/config.toml:/root/.config/epgs-to-discord/config.toml
       - /mnt/prod/recorded:/app/recorded
       - mirakc-sock:/var/run
+    security_opt:
+      - apparmor=unconfined
     environment:
         TZ: "Asia/Tokyo"
     depends_on:
