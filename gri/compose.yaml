@@ -1,0 +1,38 @@
+services:
+  gri:
+    build:
+      context: .
+    image: gri:local
+    restart: always
+    environment:
+      - RUBYOPT=-r/usr/local/gri/patches/ltsv_frozen_fix
+      - TZ=Asia/Tokyo
+    ports:
+      - "9292:9292"
+    user: root
+    volumes:
+      - ./gritab:/usr/local/gri/gritab:ro
+      - ./patches/ltsv_frozen_fix.rb:/usr/local/gri/patches/ltsv_frozen_fix.rb:ro
+      - ./tra:/usr/local/gri/tra
+      - ./gra:/usr/local/gri/gra
+    command:
+      - sh
+      - -lc
+      - |
+        set -eu
+        /usr/local/bundle/bin/grapher -h 0.0.0.0 -p 9292 &
+        web_pid=$$!
+        trap 'kill "$$web_pid" 2>/dev/null || true; exit 0' INT TERM
+        while true; do
+          if ! kill -0 "$$web_pid" 2>/dev/null; then
+            echo "grapher exited" >&2
+            exit 1
+          fi
+          /usr/local/bundle/bin/gri
+          sleep "$${GRI_INTERVAL:-300}"
+        done
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: always
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN
